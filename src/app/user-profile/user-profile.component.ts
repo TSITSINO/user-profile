@@ -16,5 +16,5 @@ import { RouterModule } from '@angular/router';
 })
 export class UserProfileComponent {
   private readonly userService = inject(UserService);
-  user$: Observable<User> = this.userService.getUserProfile();
+  public readonly user$: Observable<User> = this.userService.getUserProfile();
 }

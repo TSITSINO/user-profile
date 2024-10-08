@@ -24,7 +24,13 @@ export class UserService {
   }
 
   updateUserProfile(profile: User): Observable<any> {
-    this.mockProfile = profile;
-    return of({ success: 'successfuly' }).pipe(delay(2000));
+    const success = Math.random() > 0.2;
+    if (success) {
+      this.mockProfile = profile;
+      localStorage.setItem('userFormData', JSON.stringify(profile));
+      return of({ success: 'successfully' }).pipe(delay(2000));
+    } else {
+      return of({ error: 'Something went wrong' }).pipe(delay(2000));
+    }
   }
 }

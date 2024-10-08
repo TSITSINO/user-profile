@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'edit-profile',
     loadComponent: () =>
-      import('./create-user-profile/edit-user-profile.component').then(
+      import('./edit-user-profile/edit-user-profile.component').then(
         (m) => m.EditUserProfileComponent
       ),
   },

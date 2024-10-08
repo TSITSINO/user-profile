@@ -175,10 +175,10 @@ export class EditUserProfileComponent implements OnInit {
           this.imgSrc.set(this.userForm.value['profilePicture']);
       });
 
-    this.userForm.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((formData) => {
-        localStorage.setItem('userFormData', JSON.stringify(formData));
-      });
+    // this.userForm.valueChanges
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe((formData) => {
+    //     localStorage.setItem('userFormData', JSON.stringify(formData));
+    //   });
   }
 }
