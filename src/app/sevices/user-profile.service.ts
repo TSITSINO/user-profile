@@ -25,6 +25,6 @@ export class UserService {
 
   updateUserProfile(profile: User): Observable<any> {
     this.mockProfile = profile;
-    return of({ success: true }).pipe(delay(2000));
+    return of({ success: 'successfuly' }).pipe(delay(2000));
   }
 }

@@ -1,0 +1,186 @@
+<section class="flex justify-center flex-col items-center p-6">
+  <h1 class="text-xl font-bold my-10">Edit user profile</h1>
+  <form [formGroup]="userForm" (ngSubmit)="save()">
+    <div class="w-[790px]">
+      <section class="flex flex-col">
+        <div class="grid grid-cols-2 mt-2 gap-4">
+          <div class="flex flex-col">
+            <label class="text-sm font-semibold mb-2" for="name"
+              >First Name<sup> *</sup></label
+            >
+            <input
+              type="text"
+              class="border-2 border-gray rounded-lg p-3 h-12 w-96"
+              name="name"
+              formControlName="name"
+              [ngClass]="{
+                '!border-red-600':
+                  userForm.controls['name'].invalid &&
+                  (userForm.controls['name'].touched ||
+                    userForm.controls['name'].dirty)
+              }"
+            />
+            @if( userForm.controls['name'].invalid &&
+            (userForm.controls['name'].touched ||
+            userForm.controls['name'].dirty)){
+            <p
+              class="flex justify-start gap-1 text-red-600 items-center text-sm mt-2"
+            >
+              <span>Required</span>
+            </p>
+            }
+          </div>
+          <div class="flex flex-col">
+            <label class="text-sm font-semibold mb-2" for="surname"
+              >Last Name<sup> *</sup></label
+            >
+            <input
+              type="text"
+              class="border-2 border-gray rounded-lg p-3 h-12 w-96"
+              name="surname"
+              formControlName="surname"
+              [ngClass]="{
+                '!border-red-600':
+                  userForm.controls['surname'].invalid &&
+                  (userForm.controls['surname'].touched ||
+                    userForm.controls['surname'].dirty)
+              }"
+            />
+            @if(userForm.controls['surname'].invalid &&
+            (userForm.controls['surname'].touched ||
+            userForm.controls['surname'].dirty)){
+            <p
+              class="flex justify-start text-red-600 gap-1 items-center text-sm mt-2"
+            >
+              <span>Required</span>
+            </p>
+            }
+          </div>
+          <div class="flex flex-col">
+            <label class="text-sm font-semibold mb-2" for="email"
+              >Email<sup> *</sup></label
+            >
+            <input
+              type="email"
+              class="border-2 border-gray rounded-lg p-3 h-12 w-96"
+              name="email"
+              formControlName="email"
+              [ngClass]="{
+                '!border-red-600':
+                  userForm.controls['email'].invalid &&
+                  (userForm.controls['email'].touched ||
+                    userForm.controls['email'].dirty)
+              }"
+            />
+            @if(userForm.controls['email'].invalid &&
+            (userForm.controls['email'].touched ||
+            userForm.controls['email'].dirty)){
+            <p
+              class="flex justify-start gap-1 items-center text-sm mt-2"
+              [ngClass]="{
+                'text-red-600':
+                  userForm.controls['email'].invalid &&
+                  (userForm.controls['email'].touched ||
+                    userForm.controls['email'].dirty),
+
+              }"
+            >
+              <span>Required valid email format.</span>
+            </p>
+            }
+          </div>
+
+          <div class="flex flex-col">
+            <label for="phone" class="font-semibold text-sm mb-2"
+              >Phone Number</label
+            >
+            <input
+              class="border-2 border-gray rounded-lg p-3 h-12 w-96"
+              name="phone"
+              formControlName="phone"
+              [ngClass]="{
+                '!border-red-600':
+                  userForm.controls['phone'].invalid &&
+                  userForm.controls['phone'].dirty &&
+                  userForm.controls['phone'].value
+              }"
+            />
+            <p
+              class="flex justify-start gap-1 items-center text-sm mt-2"
+              [ngClass]="{
+                'text-red-600':
+                  userForm.controls['phone'].invalid &&
+                  userForm.controls['phone'].dirty &&
+                  userForm.controls['phone'].value,
+
+              }"
+            >
+              <span>Only numbers, format: 5XX XX XX XX</span>
+            </p>
+          </div>
+
+          <div class="flex flex-col col-span-2">
+            <label for="text" class="font-semibold text-[14px]"
+              >Profile Picture</label
+            >
+            <div class="relative">
+              <img src="assets/rectangle.svg" class="h-36 w-full" alt="" />
+              @if(!imgSrc()){
+              <div>
+                <div class="custom-file absolute top-16 left-1/2">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="customFile"
+                    name="filename"
+                    (change)="onFileSelected($event)"
+                  />
+                  <label class="custom-file-label" for="customFile">
+                    <img
+                      src="assets/plus-circle.svg"
+                      alt=""
+                      class="cursor-pointer hover: color-primary"
+                    />
+                  </label>
+                </div>
+              </div>
+              } @if(imgSrc()){
+              <div>
+                <div class="custom-file absolute top-10 left-96">
+                  <img
+                    class="size-20 rounded-lg"
+                    [src]="imgSrc()"
+                    *ngIf="imgSrc()"
+                  />
+                  <img
+                    src="assets/delete-icon.svg"
+                    class="absolute bottom-0 right-0 cursor-pointer"
+                    (click)="deleteImage()"
+                  />
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="flex justify-end gap-2">
+        <button mat-raised-button color="primary" (click)="save()">
+          @if (loading$ | async) {
+          <span
+            class="mr-3 inline-block size-4 animate-spin rounded-full border-2 border-white border-b-transparent align-text-bottom"
+          ></span>
+          Loading... } @else {
+          <span>Save</span>
+          }
+        </button>
+        <button mat-raised-button [routerLink]="['']" class="text-black">
+          Cancel
+        </button>
+      </section>
+    </div>
+  </form>
+</section>
+
+<
