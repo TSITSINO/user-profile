@@ -1,0 +1,29 @@
+<section class="size-full flex justify-center items-center">
+  @if(user$ | async ; as user){
+  <mat-card class="example-card" appearance="outlined" class="p-4">
+    <mat-card-header class="mb-2">
+      <mat-card-title>{{ user.name }} {{ user.surname }}</mat-card-title>
+    </mat-card-header>
+    @if(user.profilePicture){
+    <img mat-card-image [src]="user.profilePicture" class="h-60 w-60" />}
+
+    <mat-card-content class="mt-2">
+      <p>Email: {{ user.email }}</p>
+      @if (user.phone ) {
+      <p>Phone Number: {{ user.phone }}</p>
+      }
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/edit-profile']"
+        routerLinkActive="router-link-active"
+        class="m-2"
+      >
+        Edit profile
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  }
+</section>
